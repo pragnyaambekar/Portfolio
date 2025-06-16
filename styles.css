@@ -28,6 +28,7 @@
     /* Transitions */
     --transition-standard: all 0.3s ease;
 }
+
 /* Follow-up options styling */
 .follow-up-options {
     display: flex;
@@ -98,10 +99,14 @@ body.dark-mode .typing-dot {
 }
 
 @keyframes typingDots {
-    0%, 80%, 100% {
+
+    0%,
+    80%,
+    100% {
         transform: scale(0.8);
         opacity: 0.5;
     }
+
     40% {
         transform: scale(1);
         opacity: 1;
@@ -120,7 +125,7 @@ body.dark-mode .typing-dot {
         flex-direction: column;
         gap: 0.75rem;
     }
-    
+
     .follow-up-btn {
         width: 100%;
         padding: 0.75rem 1rem;
@@ -925,6 +930,7 @@ body.dark-mode .social-button-labeled.gmail {
         display: block;
     }
 }
+
 /* Ensure all terminal elements use monospace */
 .terminal,
 .terminal * {
@@ -974,6 +980,7 @@ body.dark-mode .social-button-labeled.gmail {
     font-family: 'Fira Code', 'Courier New', monospace !important;
     line-height: 1.6;
 }
+
 .terminal-glow {
     position: absolute;
     inset: -2px;
@@ -1014,6 +1021,7 @@ body.dark-mode .terminal {
 body.dark-mode .terminal-header {
     background-color: var(--dark-terminal-header);
 }
+
 /* Add these styles to your styles.css file */
 
 /* Interactive Terminal Styles */
@@ -1084,6 +1092,7 @@ body.dark-mode .terminal-content::-webkit-scrollbar-thumb {
 body.dark-mode .terminal-input {
     caret-color: var(--dark-accent);
 }
+
 .terminal-buttons {
     display: flex;
     gap: 0.5rem;
@@ -1126,6 +1135,7 @@ body.dark-mode .terminal-title {
     height: 350px;
     overflow-y: auto;
 }
+
 .terminal-input {
     background: transparent;
     border: none;
@@ -1136,6 +1146,7 @@ body.dark-mode .terminal-title {
     width: calc(100% - 1rem);
     margin-left: 0.5rem;
 }
+
 .command-line {
     font-style: monospace;
     display: flex;
@@ -1789,7 +1800,7 @@ body.dark-mode .features-list {
    Experience Section - Enhanced
    ======================================== */
 
-   .experience-section {
+.experience-section {
     padding: 6rem 0;
     position: relative;
     background-color: var(--light-bg);
@@ -1807,7 +1818,7 @@ body.dark-mode .experience-section {
     position: absolute;
     inset: 0;
     opacity: 0.1;
-    background-image: 
+    background-image:
         linear-gradient(to right, var(--light-accent) 1px, transparent 1px),
         linear-gradient(to bottom, var(--light-accent) 1px, transparent 1px);
     background-size: 60px 60px;
@@ -1817,13 +1828,18 @@ body.dark-mode .experience-section {
 }
 
 @keyframes gridSlide {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(60px, 60px); }
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(60px, 60px);
+    }
 }
 
 body.dark-mode .experience-section::before {
     opacity: 0.08;
-    background-image: 
+    background-image:
         linear-gradient(to right, var(--dark-accent) 1px, transparent 1px),
         linear-gradient(to bottom, var(--dark-accent) 1px, transparent 1px);
 }
@@ -1874,16 +1890,16 @@ body.dark-mode .experience-section::before {
     left: 0;
     width: 100%;
     height: 0;
-    background: linear-gradient(
-        to bottom, 
-        var(--light-accent), 
-        rgba(70, 130, 169, 0.3)
-    );
+    background: linear-gradient(to bottom,
+            var(--light-accent),
+            rgba(70, 130, 169, 0.3));
     animation: lineGrow 2s ease-out 0.5s forwards;
 }
 
 @keyframes lineGrow {
-    to { height: 100%; }
+    to {
+        height: 100%;
+    }
 }
 
 /* Timeline Item */
@@ -1908,10 +1924,21 @@ body.dark-mode .experience-section::before {
 }
 
 /* Staggered animations */
-.timeline-item:nth-child(1).visible { transition-delay: 0.2s; }
-.timeline-item:nth-child(2).visible { transition-delay: 0.3s; }
-.timeline-item:nth-child(3).visible { transition-delay: 0.4s; }
-.timeline-item:nth-child(4).visible { transition-delay: 0.5s; }
+.timeline-item:nth-child(1).visible {
+    transition-delay: 0.2s;
+}
+
+.timeline-item:nth-child(2).visible {
+    transition-delay: 0.3s;
+}
+
+.timeline-item:nth-child(3).visible {
+    transition-delay: 0.4s;
+}
+
+.timeline-item:nth-child(4).visible {
+    transition-delay: 0.5s;
+}
 
 /* Logo Container */
 .timeline-logo-container {
@@ -1943,10 +1970,12 @@ body.dark-mode .experience-section::before {
         opacity: 0;
         transform: scale(0.8);
     }
+
     50% {
         opacity: 1;
         transform: scale(1.2);
     }
+
     100% {
         opacity: 0;
         transform: scale(1.4);
@@ -1986,9 +2015,11 @@ body.dark-mode .timeline-logo {
         transform: scale(0) rotate(-180deg);
         opacity: 0;
     }
+
     50% {
         transform: scale(1.1) rotate(10deg);
     }
+
     100% {
         transform: scale(1) rotate(0deg);
         opacity: 1;
@@ -2160,8 +2191,13 @@ body.dark-mode .timeline-card {
 }
 
 /* Staggered list animation */
-.timeline-item.visible .timeline-achievements li:nth-child(1) { transition-delay: 0.5s; }
-.timeline-item.visible .timeline-achievements li:nth-child(2) { transition-delay: 0.6s; }
+.timeline-item.visible .timeline-achievements li:nth-child(1) {
+    transition-delay: 0.5s;
+}
+
+.timeline-item.visible .timeline-achievements li:nth-child(2) {
+    transition-delay: 0.6s;
+}
 
 .timeline-achievements li::before {
     content: '▸';
@@ -2201,10 +2237,21 @@ body.dark-mode .timeline-card {
 }
 
 /* Staggered tech tag animations */
-.timeline-item.visible .tech-tags span:nth-child(1) { transition-delay: 0.6s; }
-.timeline-item.visible .tech-tags span:nth-child(2) { transition-delay: 0.7s; }
-.timeline-item.visible .tech-tags span:nth-child(3) { transition-delay: 0.8s; }
-.timeline-item.visible .tech-tags span:nth-child(4) { transition-delay: 0.9s; }
+.timeline-item.visible .tech-tags span:nth-child(1) {
+    transition-delay: 0.6s;
+}
+
+.timeline-item.visible .tech-tags span:nth-child(2) {
+    transition-delay: 0.7s;
+}
+
+.timeline-item.visible .tech-tags span:nth-child(3) {
+    transition-delay: 0.8s;
+}
+
+.timeline-item.visible .tech-tags span:nth-child(4) {
+    transition-delay: 0.9s;
+}
 
 .tech-tags span:hover {
     transform: translateY(-2px) scale(1.05);
@@ -2218,23 +2265,23 @@ body.dark-mode .timeline-card {
     .timeline-line {
         left: 30px;
     }
-    
+
     .timeline-logo-container {
         left: 30px;
         width: 50px;
         height: 50px;
     }
-    
+
     .timeline-logo {
         width: 50px;
         height: 50px;
     }
-    
+
     .timeline-item,
     .timeline-item:nth-child(odd) {
         flex-direction: column;
     }
-    
+
     .timeline-date {
         width: 100%;
         text-align: left;
@@ -2243,17 +2290,17 @@ body.dark-mode .timeline-card {
         margin-bottom: 1rem;
         transform: translateX(0);
     }
-    
+
     .timeline-content {
         width: 100%;
         padding-left: 100px;
         padding-right: 1.5rem;
     }
-    
+
     .timeline-card {
         transform: translateX(0) scale(0.95);
     }
-    
+
     .timeline-item:nth-child(odd) .timeline-card {
         transform: translateX(0) scale(0.95);
     }
@@ -2261,11 +2308,9 @@ body.dark-mode .timeline-card {
 
 /* Dark mode adjustments */
 body.dark-mode .timeline-line::before {
-    background: linear-gradient(
-        to bottom, 
-        var(--dark-accent), 
-        rgba(70, 130, 169, 0.3)
-    );
+    background: linear-gradient(to bottom,
+            var(--dark-accent),
+            rgba(70, 130, 169, 0.3));
 }
 
 body.dark-mode .logo-ring {
@@ -2867,6 +2912,40 @@ body.dark-mode .restart-text {
 
 body.dark-mode .chat-messages::-webkit-scrollbar-thumb {
     background: #475569;
+}
+
+/* Restart Chat Button Styles */
+.restart-bubble {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef) !important;
+    border: 1px solid #dee2e6;
+    text-align: center;
+}
+
+body.dark-mode .restart-bubble {
+    background: linear-gradient(135deg, #1a2332, #1e293b) !important;
+    border-color: #334155;
+}
+
+.restart-chat-btn {
+    background: var(--light-accent);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 8px rgba(70, 130, 169, 0.2);
+}
+
+.restart-chat-btn:hover {
+    background: #5B9AC7;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(70, 130, 169, 0.3);
 }
 
 /* Responsive Design */

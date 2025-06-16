@@ -1,5 +1,12 @@
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function () {
+    // EmailJS Configuration
+    emailjs.init('p-hYrNXBAljmO2v2h');
+
+    const EMAIL_CONFIG = {
+        serviceID: 'service_wh09gi7',
+        templateID: 'template_tq4besv'
+    };
     // ======= THEME TOGGLE FUNCTIONALITY WITH PERSISTENCE =======
     const themeToggle = document.getElementById('theme-toggle');
     const body = document.body;
@@ -18,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Update the label text
         const themeLabel = document.querySelector('.theme-label');
         if (themeLabel) {
-            themeLabel.textContent = theme === 'dark-mode' ? 'Dark Mode' : 'Light Mode';
+            themeLabel.textContent = theme === 'dark-mode' ? 'Light Mode' : 'Dark Mode';
         }
 
         // Save to localStorage
@@ -45,8 +52,8 @@ document.addEventListener('DOMContentLoaded', function () {
     if (typedTextElement) {
         const phrases = [
             "an AI enthusiast",
-            "a problem solver",
-            "a UW Bothell researcher"
+            "a Masters Student",
+            "a software engineer"
         ];
         let currentPhraseIndex = 0;
         let currentCharIndex = 0;
@@ -100,13 +107,13 @@ document.addEventListener('DOMContentLoaded', function () {
     function setupInteractiveTerminal() {
         const terminal = document.querySelector('.terminal');
         const terminalContent = document.querySelector('.terminal-content');
-        
 
-    if (!terminal || !terminalContent) return;
 
-    // Force monospace font
-    terminal.style.fontFamily = "'Fira Code', monospace";
-    terminalContent.style.fontFamily = "'Fira Code', monospace";
+        if (!terminal || !terminalContent) return;
+
+        // Force monospace font
+        terminal.style.fontFamily = "'Fira Code', monospace";
+        terminalContent.style.fontFamily = "'Fira Code', monospace";
         if (!terminal || !terminalContent) return;
 
         // Terminal state
@@ -270,12 +277,12 @@ I love tackling complex problems and building systems that make a difference. Wh
     function setupSkillCardAnimations() {
         const skillCards = document.querySelectorAll('.tech-card');
         const skillsSection = document.querySelector('.skills-section');
-        
+
         // Reset animation on scroll
         function checkSkillCards() {
             const triggerBottom = window.innerHeight * 0.8;
             const sectionTop = skillsSection.getBoundingClientRect().top;
-            
+
             if (sectionTop < triggerBottom) {
                 skillCards.forEach((card, index) => {
                     // Re-trigger animation by removing and adding class
@@ -290,7 +297,7 @@ I love tackling complex problems and building systems that make a difference. Wh
                 });
             }
         }
-        
+
         // Add intersection observer for better performance
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -301,30 +308,30 @@ I love tackling complex problems and building systems that make a difference. Wh
         }, {
             threshold: 0.1
         });
-        
+
         if (skillsSection) {
             observer.observe(skillsSection);
         }
-        
-     
+
+
     }
 
     // ======= ENHANCED EXPERIENCE SECTIONFsetu ANIMATIONS =======
     function setupExperienceAnimations() {
         const timelineItems = document.querySelectorAll('.timeline-item');
         const logos = document.querySelectorAll('.timeline-logo');
-        
+
         // Intersection Observer for scroll animations
         const observerOptions = {
             threshold: 0.2,
             rootMargin: '0px 0px -50px 0px'
         };
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    
+
                     // Trigger logo animation
                     const logo = entry.target.querySelector('.timeline-logo');
                     if (logo) {
@@ -335,15 +342,15 @@ I love tackling complex problems and building systems that make a difference. Wh
                 }
             });
         }, observerOptions);
-        
+
         // Observe all timeline items
         timelineItems.forEach(item => {
             observer.observe(item);
         });
-        
+
         // Parallax effect for logos on scroll
-        
-        
+
+
         // Throttled scroll event for performance
         let scrollTimeout;
         window.addEventListener('scroll', () => {
@@ -352,20 +359,20 @@ I love tackling complex problems and building systems that make a difference. Wh
             }
             scrollTimeout = window.requestAnimationFrame(updateLogoParallax);
         });
-        
-       
-        
+
+
+
         // Magnetic effect on mouse move
         logos.forEach(logo => {
-            logo.addEventListener('mousemove', function(e) {
+            logo.addEventListener('mousemove', function (e) {
                 const rect = this.getBoundingClientRect();
                 const x = e.clientX - rect.left - rect.width / 2;
                 const y = e.clientY - rect.top - rect.height / 2;
-                
+
                 this.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px) scale(1.1)`;
             });
-            
-            logo.addEventListener('mouseleave', function() {
+
+            logo.addEventListener('mouseleave', function () {
                 this.style.transform = '';
             });
         });
@@ -377,9 +384,9 @@ I love tackling complex problems and building systems that make a difference. Wh
         const quickReplies = document.getElementById('quickReplies');
         const chatForm = document.getElementById('chatForm');
         const chatInput = document.getElementById('chatInput');
-        
+
         if (!chatMessages || !quickReplies || !chatForm || !chatInput) return;
-        
+
         // Bot responses configuration
         const botResponses = {
             'discuss-project': {
@@ -404,7 +411,7 @@ I love tackling complex problems and building systems that make a difference. Wh
         function typeWriter(element, text, speed = 50) {
             element.textContent = '';
             let i = 0;
-            
+
             function type() {
                 if (i < text.length) {
                     element.textContent += text.charAt(i);
@@ -412,53 +419,53 @@ I love tackling complex problems and building systems that make a difference. Wh
                     setTimeout(type, speed);
                 }
             }
-            
+
             type();
         }
         function showFollowUpOptions() {
             const followUpDiv = document.createElement('div');
             followUpDiv.className = 'message bot-message';
-            
+
             const bubbleDiv = document.createElement('div');
             bubbleDiv.className = 'message-bubble';
-            
+
             // Create the question text and buttons
             const questionText = document.createElement('p');
             questionText.textContent = 'Is there anything else I can help you with?';
             questionText.style.marginBottom = '10px';
-            
+
             const buttonContainer = document.createElement('div');
             buttonContainer.className = 'follow-up-options';
             buttonContainer.innerHTML = `
                 <button class="follow-up-btn" data-follow="yes">Yes</button>
                 <button class="follow-up-btn" data-follow="no">No</button>
             `;
-            
+
             // Append question and buttons to bubble
             bubbleDiv.appendChild(questionText);
             bubbleDiv.appendChild(buttonContainer);
             followUpDiv.appendChild(bubbleDiv);
-        
+
             const timeSpan = document.createElement('span');
             timeSpan.className = 'message-time';
             timeSpan.textContent = 'just now';
             followUpDiv.appendChild(timeSpan);
-        
+
             chatMessages.appendChild(followUpDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
-        
+
             // Add event listeners to the buttons
             const followUpButtons = buttonContainer.querySelectorAll('.follow-up-btn');
             followUpButtons.forEach(btn => {
                 btn.addEventListener('click', () => {
                     const response = btn.dataset.follow;
-                    
+
                     // Add user message showing what they clicked
                     addMessage(btn.textContent, true);
-        
+
                     // Remove the follow-up options
                     followUpDiv.remove();
-        
+
                     // Bot responses based on user choice
                     if (response === 'yes') {
                         setTimeout(() => {
@@ -472,22 +479,77 @@ I love tackling complex problems and building systems that make a difference. Wh
                         setTimeout(() => {
                             addMessage("Perfect! Thanks for stopping by and getting to know me better. Have a wonderful day! 👋");
                             setTimeout(() => {
-                                chatForm.style.display = 'none';
+                                showRestartOption();
                             }, 2000);
                         }, 1000);
                     }
                 });
             });
         }
-        
+        // Function to show restart chat option
+        function showRestartOption() {
+            const restartDiv = document.createElement('div');
+            restartDiv.className = 'message bot-message';
+
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.className = 'message-bubble restart-bubble';
+
+            const restartText = document.createElement('p');
+            restartText.textContent = 'Want to start a new conversation?';
+            restartText.style.marginBottom = '10px';
+
+            const restartButton = document.createElement('button');
+            restartButton.className = 'restart-chat-btn';
+            restartButton.innerHTML = ' Restart Chat';
+
+            bubbleDiv.appendChild(restartText);
+            bubbleDiv.appendChild(restartButton);
+            restartDiv.appendChild(bubbleDiv);
+
+            const timeSpan = document.createElement('span');
+            timeSpan.className = 'message-time';
+            timeSpan.textContent = 'just now';
+            restartDiv.appendChild(timeSpan);
+
+            chatMessages.appendChild(restartDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Add event listener to restart button
+            restartButton.addEventListener('click', () => {
+                restartChat();
+            });
+        }
+
+        // Function to restart the chat
+        function restartChat() {
+            // Clear all messages except the initial one
+            chatMessages.innerHTML = `
+                <div class="message bot-message">
+                    <div class="message-bubble">
+                        <span class="typing-text">Hey there! 👋 I'm Pragnya. What brings you here today?</span>
+                    </div>
+                    <span class="message-time">just now</span>
+                </div>
+            `;
+
+            // Show quick replies again
+            quickReplies.style.display = 'flex';
+            chatForm.style.display = 'none';
+
+            // Clear input
+            chatInput.value = '';
+
+            // Scroll to top
+            chatMessages.scrollTop = 0;
+        }
         // Add message to chat
         function addMessage(message, isUser = false, animate = true, askFollowUp = false) {
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
-            
+
             const bubbleDiv = document.createElement('div');
             bubbleDiv.className = 'message-bubble';
-        
+
             if (!isUser && animate) {
                 bubbleDiv.innerHTML = `
                     <div class="typing-dots">
@@ -497,14 +559,14 @@ I love tackling complex problems and building systems that make a difference. Wh
                     </div>`;
                 messageDiv.appendChild(bubbleDiv);
                 chatMessages.appendChild(messageDiv);
-        
+
                 setTimeout(() => {
                     bubbleDiv.innerHTML = '';
                     const textSpan = document.createElement('span');
                     textSpan.className = 'typing-text';
                     bubbleDiv.appendChild(textSpan);
                     typeWriter(textSpan, message);
-        
+
                     if (askFollowUp) {
                         setTimeout(() => {
                             showFollowUpOptions();
@@ -515,43 +577,61 @@ I love tackling complex problems and building systems that make a difference. Wh
                 bubbleDiv.textContent = message;
                 messageDiv.appendChild(bubbleDiv);
                 chatMessages.appendChild(messageDiv);
-        
+
                 if (askFollowUp) {
                     setTimeout(() => {
                         showFollowUpOptions();
                     }, 500);
                 }
             }
-        
+
             const timeSpan = document.createElement('span');
             timeSpan.className = 'message-time';
             timeSpan.textContent = 'just now';
             messageDiv.appendChild(timeSpan);
-        
+
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
-        
+
+        // Function to send email via EmailJS
+        function sendEmailNotification(userMessage, topic) {
+            const templateParams = {
+                topic: topic,
+                message: userMessage,
+                timestamp: new Date().toLocaleString()
+            };
+
+            return emailjs.send(EMAIL_CONFIG.serviceID, EMAIL_CONFIG.templateID, templateParams)
+                .then(function(response) {
+                    console.log('Email sent successfully:', response);
+                    return true;
+                })
+                .catch(function(error) {
+                    console.error('Failed to send email:', error);
+                    return false;
+                });
+        }
 
         // Handle quick reply clicks
         quickReplies.addEventListener('click', (e) => {
             if (e.target.classList.contains('quick-reply-btn')) {
                 const reply = e.target.dataset.reply;
                 const replyText = e.target.textContent;
-                
+
                 // Add user message
                 addMessage(replyText, true);
-                
+
                 // Add bot response
                 if (botResponses[reply]) {
                     setTimeout(() => {
                         addMessage(botResponses[reply].message);
-                        
+
                         // Show chat form after initial interaction
                         setTimeout(() => {
                             quickReplies.style.display = 'none';
                             chatForm.style.display = 'flex';
                             chatInput.focus();
-                            
+
                             // Add instructions
                             setTimeout(() => {
                                 addMessage("Feel free to type your message below, and I'll make sure Pragnya gets it! 💬");
@@ -565,30 +645,30 @@ I love tackling complex problems and building systems that make a difference. Wh
         // Handle form submission
         chatForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            
             const message = chatInput.value.trim();
             if (message) {
                 // Add user message
                 addMessage(message, true);
+                const userMessage = message;
                 chatInput.value = '';
                 
-                // Bot response
+                // Show sending message
                 setTimeout(() => {
-                    const responses = [
-                        "Thanks for your message! I'll make sure Pragnya sees this.",
-                        "Got it! Pragnya will get back to you within 24 hours.",
-                        "Message received! Pragnya usually responds within a day.",
-                        "Perfect! I've noted this down for Pragnya."
-                    ];
+                    addMessage("Sending your message...", false, true, false);
                     
-                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-addMessage(randomResponse, false, true, true); // ask follow-up after response
-
-                    
-                    // Follow up with contact info
-                    setTimeout(() => {
-                        addMessage("In the meantime, you can also reach out directly via email at pragnya.ambekar@gmail.com or connect on LinkedIn!");
-                    }, 2000);
+                    // Send email
+                    sendEmailNotification(userMessage, 'Portfolio Chat')
+                        .then(success => {
+                            if (success) {
+                                setTimeout(() => {
+                                    addMessage("Message sent! Pragnya will get back to you within 24 hours. 📧", false, true, true);
+                                }, 1000);
+                            } else {
+                                setTimeout(() => {
+                                    addMessage("Sorry, there was an issue sending your message. Please try the email link below.", false, true, true);
+                                }, 1000);
+                            }
+                        });
                 }, 1000);
             }
         });
