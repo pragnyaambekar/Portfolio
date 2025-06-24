@@ -706,4 +706,5 @@ I love tackling complex problems and building systems that make a difference. Wh
 
     // Run animations on scroll
     window.addEventListener('scroll', handleScrollAnimations);
+
 });
