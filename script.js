@@ -406,7 +406,89 @@ I love tackling complex problems and building systems that make a difference. Wh
                 followUp: 'general-chat'
             }
         };
+        // Add these functions inside initConversationalContact(), after showRestartOption()
 
+        // Function to ask for email
+        function askForEmail() {
+            const emailDiv = document.createElement('div');
+            emailDiv.className = 'message bot-message';
+
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.className = 'message-bubble';
+
+            const questionText = document.createElement('p');
+            questionText.textContent = 'Great! To make sure I can respond to you, could you please share your email address?';
+            questionText.style.marginBottom = '10px';
+
+            const emailForm = document.createElement('form');
+            emailForm.className = 'email-input-form';
+            emailForm.innerHTML = `
+        <input type="email" class="email-input" placeholder="your.email@example.com" required style="
+            width: 100%; 
+            padding: 8px 12px; 
+            border: 1px solid #e2e8f0; 
+            border-radius: 15px; 
+            margin-bottom: 10px;
+            font-size: 14px;
+        ">
+        <button type="submit" style="
+            background: var(--light-accent); 
+            color: white; 
+            border: none; 
+            border-radius: 15px; 
+            padding: 8px 16px; 
+            cursor: pointer;
+            font-size: 14px;
+        ">Continue</button>
+    `;
+
+            bubbleDiv.appendChild(questionText);
+            bubbleDiv.appendChild(emailForm);
+            emailDiv.appendChild(bubbleDiv);
+
+            const timeSpan = document.createElement('span');
+            timeSpan.className = 'message-time';
+            timeSpan.textContent = 'just now';
+            emailDiv.appendChild(timeSpan);
+
+            chatMessages.appendChild(emailDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Handle email form submission
+            emailForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const emailInput = emailForm.querySelector('.email-input');
+                const email = emailInput.value.trim();
+
+                if (email) {
+                    // Store email for later use
+                    window.userEmail = email;
+
+                    // Add user message showing the email
+                    addMessage(email, true);
+
+                    // Remove the email form
+                    emailDiv.remove();
+
+                    // Continue with the chat
+                    setTimeout(() => {
+                        proceedToMainChat();
+                    }, 1000);
+                }
+            });
+        }
+
+        // Function to proceed to main chat after email collection
+        function proceedToMainChat() {
+            addMessage("Perfect! Now please tell me more about what you'd like to discuss:");
+
+            // Show the main chat form
+            setTimeout(() => {
+                quickReplies.style.display = 'none';
+                chatForm.style.display = 'flex';
+                chatInput.focus();
+            }, 1000);
+        }
         // Typewriter effect
         function typeWriter(element, text, speed = 50) {
             element.textContent = '';
@@ -595,28 +677,44 @@ I love tackling complex problems and building systems that make a difference. Wh
 
         // Function to send email via EmailJS
         function sendEmailNotification(userMessage, topic) {
+            // Create proper subject based on topic
+            const subjectMap = {
+                'discuss-project': 'Project Discussion - Portfolio Contact',
+                'job-opportunity': 'Job Opportunity - Portfolio Contact',
+                'collaboration': 'Collaboration Request - Portfolio Contact',
+                'just-saying-hi': 'General Inquiry - Portfolio Contact'
+            };
+
+            const subject = subjectMap[topic] || 'Portfolio Contact';
+
             const templateParams = {
-                topic: topic,
+                topic: subject,
                 message: userMessage,
-                timestamp: new Date().toLocaleString()
+                timestamp: new Date().toLocaleString(),
+                from_email: window.userEmail || 'No email provided',
+                reply_to: window.userEmail || 'noreply@example.com'
             };
 
             return emailjs.send(EMAIL_CONFIG.serviceID, EMAIL_CONFIG.templateID, templateParams)
-                .then(function(response) {
+                .then(function (response) {
                     console.log('Email sent successfully:', response);
                     return true;
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     console.error('Failed to send email:', error);
                     return false;
                 });
         }
 
         // Handle quick reply clicks
+        // Handle quick reply clicks
         quickReplies.addEventListener('click', (e) => {
             if (e.target.classList.contains('quick-reply-btn')) {
                 const reply = e.target.dataset.reply;
                 const replyText = e.target.textContent;
+
+                // Store the selected topic for later use
+                window.selectedTopic = reply;
 
                 // Add user message
                 addMessage(replyText, true);
@@ -626,16 +724,9 @@ I love tackling complex problems and building systems that make a difference. Wh
                     setTimeout(() => {
                         addMessage(botResponses[reply].message);
 
-                        // Show chat form after initial interaction
+                        // Ask for email after bot response
                         setTimeout(() => {
-                            quickReplies.style.display = 'none';
-                            chatForm.style.display = 'flex';
-                            chatInput.focus();
-
-                            // Add instructions
-                            setTimeout(() => {
-                                addMessage("Feel free to type your message below, and I'll make sure Pragnya gets it! 💬");
-                            }, 2000);
+                            askForEmail();
                         }, 2000);
                     }, 1000);
                 }
@@ -651,13 +742,14 @@ I love tackling complex problems and building systems that make a difference. Wh
                 addMessage(message, true);
                 const userMessage = message;
                 chatInput.value = '';
-                
+
                 // Show sending message
                 setTimeout(() => {
                     addMessage("Sending your message...", false, true, false);
-                    
-                    // Send email
-                    sendEmailNotification(userMessage, 'Portfolio Chat')
+
+                    // Send email with collected topic and email
+                    const topicToSend = window.selectedTopic || 'general-inquiry';
+                    sendEmailNotification(userMessage, topicToSend)
                         .then(success => {
                             if (success) {
                                 setTimeout(() => {
