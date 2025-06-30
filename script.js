@@ -13,39 +13,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to set theme
     function setTheme(theme) {
-        // Remove any existing theme classes
         body.classList.remove('light-mode', 'dark-mode');
-
-        // Add the new theme class
         body.classList.add(theme);
 
-        // Update the toggle button
+        // Update toggle button
         themeToggle.innerHTML = theme === 'dark-mode' ? '☀️' : '🌙';
 
-        // Update the label text
+        // Update label
         const themeLabel = document.querySelector('.theme-label');
         if (themeLabel) {
             themeLabel.textContent = theme === 'dark-mode' ? 'Light Mode' : 'Dark Mode';
         }
-
-        // Save to localStorage
-        localStorage.setItem('theme', theme);
     }
 
-    // Apply saved theme from localStorage or default to light mode
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        setTheme(savedTheme);
-    } else {
-        // Default to light mode if no preference
-        setTheme('light-mode');
-    }
+    // Always start in dark mode
+    setTheme('dark-mode');
 
-    // Toggle dark/light theme
+    // Toggle theme on button click
     themeToggle.addEventListener('click', () => {
         const isDarkMode = body.classList.contains('dark-mode');
         setTheme(isDarkMode ? 'light-mode' : 'dark-mode');
     });
+
 
     // ======= TYPING ANIMATION =======
     const typedTextElement = document.getElementById('typed-text');
