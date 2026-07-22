@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (typedTextElement) {
         const phrases = [
             "an AI enthusiast",
-            "a Masters Student",
+            "a Masters Graduate",
             "a software engineer"
         ];
         let currentPhraseIndex = 0;
@@ -112,9 +112,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Available commands and their outputs
         const commands = {
-            'cat about_me.txt': `I'm passionate about AI and software engineering with a focus on creating impactful solutions. My journey began with my BTech degree where I excelled academically, and has continued at UW Bothell where I'm researching generative AI and content moderation technologies.
+            'cat about_me.txt': `MS graduate in Computer Science and Software Engineering from UW Bothell. My thesis was on detecting React architectural anti-patterns using static analysis and the TypeScript Compiler API. Before that I spent time doing NLP research on toxicity detection, and most recently interned at Secure AIs working on LLM-powered document workflows.
 
-I love tackling complex problems and building systems that make a difference. When I'm not coding, you can find me exploring new technologies or contributing to open-source projects.`,
+I like working on problems that have real users on the other side. Outside of work I enjoy exploring new tools, contributing to projects, and occasionally breaking things to see how they work.`,
             'clear': 'CLEAR'
         };
 

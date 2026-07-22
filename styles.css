@@ -1627,6 +1627,14 @@ body.dark-mode .project-card:hover {
     background-image: url('https://images.unsplash.com/photo-1633412802994-5c058f151b66?q=80&w=1170&auto=format&fit=crop');
 }
 
+.project-image-5 {
+    background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1170&auto=format&fit=crop');
+}
+
+.project-image-6 {
+    background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1170&auto=format&fit=crop');
+}
+
 /* Project Tags */
 .project-tags {
     position: absolute;
@@ -1886,7 +1894,7 @@ body.dark-mode .experience-section::before {
 /* Timeline Container */
 .timeline-container {
     position: relative;
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 2rem 0;
 }
